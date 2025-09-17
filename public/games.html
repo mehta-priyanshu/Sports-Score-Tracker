@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNO Game Screen</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+       /* Reset & General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Full Page Styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    padding: 20px;
+    flex-direction: column;
+}
+
+/* Glassmorphic Player Selection Container */
+.selection-container, .game-selection-container{
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Player Grid - 4 Players Per Row */
+.player-selection {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.game-selection-container {
+    display: block;
+}
+.selection-container {
+    display: none;
+}
+
+.player-selection label {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.player-selection input {
+    margin-right: 8px;
+}
+
+.player-selection label:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+/* Start Game Button */
+#startGame {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #ff6f61;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#startGame:hover {
+    background: #ff3b2e;
+    transform: scale(1.05);
+}
+
+/* Game Container */
+.game-container {
+    width: 100vw;
+    height: 100vh;
+    display: none; /* Hidden initially */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.center-deck {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 160px;
+    background: linear-gradient(135deg, #ff006e, #8338ec);
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* Players Layout */
+.players-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Circular Player Icons */
+.player {
+    margin-top: 8px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e63946, #f4a261);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    font-size: 14px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    position: absolute;
+}
+
+    </style>
+    <script src="assets/js/toolbar.js" defer></script>
+    <script src="assets/js/games.js"></script>
+</head>
+<body>
+    <div id="toolbar-container"></div>
+    
+    <div class="game-selection-container">
+        <h2>Select a Game</h2>
+        <select id="gameSelection" class="form-select"> 
+            <option value="">-- Choose a Game --</option>
+            <option value="uno">UNO</option>
+            <option value="cricket">CRICKET</option>
+            <option value="cards">CARDS</option>
+        </select>
+        <button id="chooseGame" class="btn btn-primary mt-3">Next</button>
+    </div>
+       
+    <div class="selection-container">
+        <h2>Select Players</h2>
+        <div id="player-selection" class="player-selection"></div>
+        <button id="startGame" class="btn btn-success mt-3">Start Game</button>
+    </div>
+    <div class="game-container" id="gameContainer">
+        <div class="center-deck" id="centerDeck">GAME</div>
+    </div>
+    <!-- Toast Container -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+  <div id="popupToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastMessage">
+        <!-- Message will be inserted here -->
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
