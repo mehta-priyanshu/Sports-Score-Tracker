@@ -16,16 +16,16 @@ function displayData(players) {
             const row = document.createElement("tr");
             row.setAttribute("data-id", player._id);
             row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${player.name}</td>
-                <td>${player.email}</td>
-                <td>${player.contact}</td>
-                <td>${player.games}</td>
-                <td class="action-buttons">
+                <td data-label="S.No.">${index + 1}</td>
+                <td data-label="Name">${player.name}</td>
+                <td data-label="Email">${player.email}</td>
+                <td data-label="Contact">${player.contact}</td>
+                <td data-label="Action" class="action-buttons">
                     <button class="edit-button">Edit</button>
                     <button class="delete-button">Delete</button>
                 </td>
             `;
+
             tbody.appendChild(row);
         });
     } else {
